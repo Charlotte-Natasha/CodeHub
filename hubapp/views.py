@@ -8,3 +8,7 @@ def index(request):
 def contact(request):
 
     return render(request, 'hubapp/contact.html')    
+
+def resources(request):
+
+    return render(request, 'hubapp/resources.html') 
