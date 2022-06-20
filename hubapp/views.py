@@ -12,3 +12,7 @@ def contact(request):
 def resources(request):
 
     return render(request, 'hubapp/resources.html') 
+
+def community(request):
+
+    return render(request, 'hubapp/community.html') 
