@@ -16,3 +16,7 @@ def resources(request):
 def community(request):
 
     return render(request, 'hubapp/community.html') 
+
+def process(request):
+
+    return render(request, 'hubapp/process.html')     
