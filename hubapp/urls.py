@@ -8,4 +8,5 @@ urlpatterns = [
     path('resources/', views.resources, name='resources'),
     path('community/', views.community, name='community'),
     path('process/', views.process, name='process'),
+    path('post/', views.post, name='post'),
 ]

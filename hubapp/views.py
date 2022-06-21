@@ -19,4 +19,8 @@ def community(request):
 
 def process(request):
 
-    return render(request, 'hubapp/process.html')     
+    return render(request, 'hubapp/process.html')
+
+def post(request):
+
+    return render(request, 'hubapp/post.html')          
