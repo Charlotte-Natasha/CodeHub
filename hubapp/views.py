@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import *
+from .forms import *
 
 # Create your views here.
 def index(request):
@@ -44,5 +45,14 @@ def process(request):
     return render(request, 'hubapp/process.html')
 
 def post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.description = request.user
+            post.save()   
+            return redirect('community')
+    else:
+        form = PostForm() 
 
-    return render(request, 'hubapp/post.html')          
+    return render(request, 'hubapp/post.html', {'form':form})          
