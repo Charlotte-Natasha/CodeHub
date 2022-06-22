@@ -6,7 +6,7 @@ from django.dispatch import receiver
 # Create your models here.
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField()
+    question = models.TextField()
 
     def __str__(self):
         return f'{self.user.username} Profile'

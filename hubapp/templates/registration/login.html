@@ -16,13 +16,13 @@
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <input type="text" name="username" class="form-control form-control-lg" />
-                        <label class="form-label" for="form1Example13">Username</label>
+                        <label class="form-label text-white" for="form1Example13">Username</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-4">
                         <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" />
-                        <label class="form-label" for="form1Example23">Password</label>
+                        <label class="form-label text-white" for="form1Example23">Password</label>
                     </div>
                     
                     <!-- Submit button -->
@@ -32,7 +32,7 @@
 
                     <div class="d-flex align-items-center justify-content-center pb-4 filter">
                         <p class="mb-0 me-2 text-white">Don't have an account?</p>
-                        <div><a href="">Create here</a></div>
+                        <div><a href="{% url 'signup' %}">Create here</a></div>
                     </div>
                 </form>
             </div>
