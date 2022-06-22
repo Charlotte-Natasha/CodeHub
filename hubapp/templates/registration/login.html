@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-<section class="vh-100">
+<section class="contact-us vh-100" id="contact">
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
@@ -10,6 +12,7 @@
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <form>
+                    {% csrf_token %}
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <input type="text" name="username" class="form-control form-control-lg" />
@@ -23,23 +26,17 @@
                     </div>
                     
                     <!-- Submit button -->
-                    <div class="filter">
-                        <button type="submit" class="data-filter">Sign in</button>
+                    <div class="main-button-red d-flex justify-content-center mb-4">
+                        <div><a href="">LogIn</a></div>
                     </div>
 
                     <div class="d-flex align-items-center justify-content-center pb-4 filter">
-                        <p class="mb-0 me-2">Don't have an account?</p>
-                        <button type="button" class="data-filter">Create new</button>
+                        <p class="mb-0 me-2 text-white">Don't have an account?</p>
+                        <div><a href="">Create here</a></div>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-    <div class="footer">
-        <p>Copyright © 2022 CODE HUB Co., Ltd. All Rights Reserved.
-            <br>Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_parent"
-                title="website templates">Charlotte-Natasha</a>
-        </p>
     </div>
 </section>
 
