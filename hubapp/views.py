@@ -55,4 +55,8 @@ def post(request):
     else:
         form = PostForm() 
 
-    return render(request, 'hubapp/post.html', {'form':form})          
+    return render(request, 'hubapp/post.html', {'form':form})
+
+def profile(request):
+
+    return render(request, 'hubapp/profile.html')              

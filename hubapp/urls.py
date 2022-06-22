@@ -10,4 +10,5 @@ urlpatterns = [
     path('community/', views.community, name='community'),
     path('process/', views.process, name='process'),
     path('post/', views.post, name='post'),
+    path('profile/', views.profile, name='profile'),
 ]
