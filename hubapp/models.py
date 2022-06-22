@@ -10,7 +10,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f'{self.user.username} Post'
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -25,4 +25,4 @@ class Profile(models.Model):
         self.user
 
     def delete_profile(self):
-        self.delete() 
+        self.delete()
