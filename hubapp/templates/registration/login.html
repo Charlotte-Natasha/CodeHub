@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<section class="contact-us vh-100" id="contact">
+<section class="contact-us" id="contact">
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
@@ -11,7 +11,7 @@
                     class="img-fluid" alt="Phone image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form>
+                <form method="POST" action="">
                     {% csrf_token %}
                     <!-- Email input -->
                     <div class="form-outline mb-4">
@@ -26,17 +26,17 @@
                     </div>
                     
                     <!-- Submit button -->
-                    <div class="d-flex justify-content-around align-items-center mb-4">
-                        <!-- Checkbox -->
+                    <!-- <div class="d-flex justify-content-around align-items-center mb-4">
+                        < Checkbox --
                         <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
                         <label class="form-check-label" for="form1Example3"> Remember me </label>
                         </div>
                         <a href="#!">Forgot password?</a>
-                    </div>
+                    </div> -->
             
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-warning btn-lg btn-block">Sign in</button>
+                    <button type="submit" value="submit" class="btn btn-warning btn-lg btn-block">Sign in</button>
 
                     <div class="d-flex align-items-center justify-content-center pb-4 filter">
                         <p class="mb-0 me-2 text-white">Don't have an account?</p>
