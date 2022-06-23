@@ -39,9 +39,17 @@ def resources(request):
     return render(request, 'hubapp/resources.html') 
 
 def community(request):
+    post = Post.objects.all()
     comment = Comment.objects.all()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('community')
+    else:
+        form = PostForm()
 
-    return render(request, 'hubapp/community.html', {'comment':comment}) 
+    return render(request, 'hubapp/community.html', {'comment':comment, 'post':post}) 
 
 def process(request):
 
