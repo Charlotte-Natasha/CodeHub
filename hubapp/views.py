@@ -62,7 +62,8 @@ def profile(request):
 
 def details(request, id):
     post = Post.objects.filter(id=id).first()
-    user = request.user()
+    comment = Comment.objects.all()
+    user = request.user
 
     if request.method == 'POST':    
         form = CommentForm()
@@ -73,7 +74,7 @@ def details(request, id):
             comment.save()
     else:
         form = CommentForm()        
-    return render(request, 'hubapp/details.html', {'post':post, 'form':form})          
+    return render(request, 'hubapp/details.html', {'post':post, 'form':form, 'comment':comment})          
 
 def post(request):
     if request.method == 'POST':
