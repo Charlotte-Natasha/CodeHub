@@ -14,47 +14,70 @@
         <div class="media justify-content-center">
             <div class="media-left">
                 {% if comment.user.profile.picture %}
-                <img class="rounded-circle" src="{{ comment.user.profile.picture.url }}" alt="Image" style="width: 4rem; height: 4rem;">
+                <img class="rounded-circle" src="{{ comment.user.profile.picture.url }}" alt="Image"
+                    style="width: 4rem; height: 4rem;">
                 {% else %}
-                <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image" style="width: 4rem; height: 4rem;">
+                <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image"
+                    style="width: 4rem; height: 4rem;">
                 {% endif %}
             </div>
 
-        <form action="" method="POST">
-            <p class="text-white">Answer here..</p>
-            
-            {% csrf_token %}
+            <form action="" method="POST">
+                <p class="text-white">Answer here..</p>
 
-            {{ form | crispy }}
+                {% csrf_token %}
 
-        <button style="margin-top: -5%" type="submit" name="action" class="btn mt-2 text-white">Post comment</button>
-        </form>
+                {{ form | crispy }}
 
-        <div class="media-content">
-            <div class="content d-flex justify-content-center">
-                <p>
-                    {% if comment.user.profile.user %}
-                    <small> @{{ comment.user.username }} </small>
-                    {% else %}
-                    <strong>Unknown</strong>
-                    {% endif %}
-                    <br>
-                    <small>{{ comment.body }}</small>
-                    <br>
-                    <small>
-                        <p>{{ comment.date }}</p>
-                    </small>
+                <button style="margin-top: -5%" type="submit" name="action" class="btn mt-2 text-white">Post
+                    comment</button>
+            </form>
+
+            <div class="card-content">
+                <div class="row">
+                    {% for comment in comments %}
+                    <article class="col media text d-flex">
+                        <figure style="margin-right: 2%;">
+                            <div>
+                                {% if comment.user.profile.picture %}
+                                <img class="rounded-circle" src="{{ comment.user.profile.picture.url }}" alt="Image"
+                                    style="width: 4rem; height: 4rem;">
+                                {% else %}
+                                <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image"
+                                    style="width: 4rem; height: 4rem;">
+                                {% endif %}
+                            </div>
+                        </figure>
+
+
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    {% if comment.user.profile.user %}
+                                    <small> @{{ comment.user.username }} </small>
+                                    {% else %}
+                                    <strong>Unknown</strong>
+                                    {% endif %}
+                                    <br>
+                                    <small>{{ comment.body }}</small>
+                                    <br>
+                                    <small>
+                                        <p>{{ comment.date }}</p>
+                                    </small>
+                                </p>
+                            </div>
+
+                    </article>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="footer">
+                <p>Copyright © 2022 CODE HUB Co., Ltd. All Rights Reserved.
+                    <br>Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_parent"
+                        title="website templates">Charlotte-Natasha</a>
                 </p>
             </div>
-        </div>
-
-    </div>
-<div class="footer">
-        <p>Copyright © 2022 CODE HUB Co., Ltd. All Rights Reserved.
-            <br>Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_parent"
-                title="website templates">Charlotte-Natasha</a>
-        </p>
-    </div>
 </section>
 
 {% endblock %}

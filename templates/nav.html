@@ -45,7 +45,23 @@
                         </li>
                         <li class=""><a href="{% url 'resources' %}">Resources</a></li> 
                         <li class=""><a href="{% url 'contact' %}">Contact Us</a></li>
-                        <li class=""><a href="{% url 'profile' %}">Profile</a></li> 
+                        <li class="has-sub">
+                            <a href="{% url 'profile' %}">Profile</a>
+                            <ul class="sub-menu">
+                                {% if user.is_authenticated%}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'profile' %}">{{request.user}}</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">LogOut</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'login' %}">LogIn</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li> 
                     </ul>        
                     <a class='menu-trigger'>
                         <span>Menu</span>
