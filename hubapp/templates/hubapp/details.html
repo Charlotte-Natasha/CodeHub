@@ -35,12 +35,12 @@
 
             <div class="card-content">
                 <div class="row">
-                    {% for comment in comments %}
+                    {% for comment in comment %}
                     <article class="col media text d-flex">
                         <figure style="margin-right: 2%;">
                             <div>
                                 {% if comment.user.profile.picture %}
-                                <img class="rounded-circle" src="{{ comment.user.profile.picture.url }}" alt="Image"
+                                <img class="rounded-circle" src="{{ comment.user.profile_picture.url }}" alt="Image"
                                     style="width: 4rem; height: 4rem;">
                                 {% else %}
                                 <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image"
@@ -51,18 +51,18 @@
 
 
                         <div class="media-content">
-                            <div class="content">
+                            <div class="content d-flex justify-content-center">
                                 <p>
                                     {% if comment.user.profile.user %}
-                                    <small> @{{ comment.user.username }} </small>
+                                    <small class="text-white"> @{{ comment.user.username }} </small>
                                     {% else %}
                                     <strong>Unknown</strong>
                                     {% endif %}
                                     <br>
-                                    <small>{{ comment.body }}</small>
+                                    <small class="text-white fw-bold">{{ comment.body }}</small>
                                     <br>
                                     <small>
-                                        <p>{{ comment.date }}</p>
+                                        <p class="text-white">{{ comment.date }}</p>
                                     </small>
                                 </p>
                             </div>
