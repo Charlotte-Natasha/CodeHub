@@ -35,6 +35,7 @@ def resources(request):
 
     return render(request, 'hubapp/resources.html') 
 
+@login_required(login_url="/login")
 def community(request):
     post = Post.objects.all()
     comment = Comment.objects.all()
@@ -52,12 +53,14 @@ def process(request):
 
     return render(request, 'hubapp/process.html')
 
+@login_required(login_url="/login")
 def profile(request):
     user = request.user
     profile = Profile.objects.get( user = user)
 
     return render(request, 'hubapp/profile.html', {'profile':profile, 'user':user})  
 
+@login_required(login_url="/login")
 def details(request, id):
     post = Post.objects.filter(id=id).first()
     comment = Comment.objects.filter(post=post).order_by('date')
@@ -74,6 +77,7 @@ def details(request, id):
         form = CommentForm()        
     return render(request, 'hubapp/details.html', {'post':post, 'form':form, 'comment':comment})          
 
+@login_required(login_url="/login")
 def post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
