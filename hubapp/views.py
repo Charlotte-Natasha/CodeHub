@@ -39,8 +39,9 @@ def resources(request):
     return render(request, 'hubapp/resources.html') 
 
 def community(request):
+    comment = Comment.objects.all()
 
-    return render(request, 'hubapp/community.html') 
+    return render(request, 'hubapp/community.html', {'comment':comment}) 
 
 def process(request):
 
@@ -48,42 +49,23 @@ def process(request):
 
 def profile(request):
 
-    return render(request, 'hubapp/profile.html')    
+    return render(request, 'hubapp/profile.html')
 
-def post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    user = request.user
-    profile = Profile.objects.get(user=user)
-
-    fuser = post.user
-    fprofile = Profile.objects.get(user=fuser)
-
-    #Profile info box
-    posts_count = Post.objects.filter(user=fuser).count()
-
-    comments = Comment.objects.filter(post=post).order_by('date')
+def details(request, id):
+    post = Post.objects.filter(id=id).first()
     
-    if request.user.is_authenticated:
-        profile = Profile.objects.get(user=user)
+    return render(request, 'hubapp/details.html', {'post':post})          
 
+def post(request):
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.user = user
-            comment.save()
-            return HttpResponseRedirect(reverse('post', args=[post_id]))
+            post = form.save(commit=False)
+            post.description = request.user
+            post.save()   
+            return redirect('community')
     else:
-        form = CommentForm()
-        template = loader.get_template('post.html')
+        form = PostForm()  
 
-    context = {
-    'post':post,
-    'profile':profile,
-    'form':form,
-    'comments':comments,
-    }
-
-    return HttpResponse(template.render(context, request))             
+    return render(request, 'hubapp/post.html', {'form':form})                 
 

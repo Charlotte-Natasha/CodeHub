@@ -11,4 +11,5 @@ urlpatterns = [
     path('process/', views.process, name='process'),
     path('post/', views.post, name='post'),
     path('profile/', views.profile, name='profile'),
+    path('details/', views.details, name='details'),
 ]
