@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.urls import reverse
+from django.template import loader
 from .models import *
 from .forms import *
 
@@ -44,19 +46,44 @@ def process(request):
 
     return render(request, 'hubapp/process.html')
 
-def post(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.description = request.user
-            post.save()   
-            return redirect('community')
-    else:
-        form = PostForm() 
-
-    return render(request, 'hubapp/post.html', {'form':form})
-
 def profile(request):
 
-    return render(request, 'hubapp/profile.html')              
+    return render(request, 'hubapp/profile.html')    
+
+def post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    fuser = post.user
+    fprofile = Profile.objects.get(user=fuser)
+
+    #Profile info box
+    posts_count = Post.objects.filter(user=fuser).count()
+
+    comments = Comment.objects.filter(post=post).order_by('date')
+    
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=user)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = user
+            comment.save()
+            return HttpResponseRedirect(reverse('post', args=[post_id]))
+    else:
+        form = CommentForm()
+        template = loader.get_template('post.html')
+
+    context = {
+    'post':post,
+    'profile':profile,
+    'form':form,
+    'comments':comments,
+    }
+
+    return HttpResponse(template.render(context, request))             
+
