@@ -14,18 +14,17 @@ def index(request):
 
 def sign_up(request):
     if request.method == 'POST':
-    
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        # password1 = request.POST['password1']
-        image = request.FILES['image']
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        image = request.FILES.get('image')
         
         user = User.objects.create_user(username=username, email=email, password=password)
+        profile = Profile.objects.create(user=user, profile_picture=image)
         user.save()
+        profile.save()
 
-        if user:
-            messages.success(request,'Profile Created Please Login')
+        if profile:
             return redirect('login')
     else:  
         return render(request, 'registration/signup.html', {})     
@@ -56,16 +55,25 @@ def process(request):
     return render(request, 'hubapp/process.html')
 
 def profile(request):
-    image = request.FILES.get('image')
     user = request.user
-    profile = Profile.objects.get( user=user, profile_picture=image)
+    profile = Profile.objects.get( user = user)
 
-    return render(request, 'hubapp/profile.html', {'profile':profile})
+    return render(request, 'hubapp/profile.html', {'profile':profile, 'user':user})  
 
 def details(request, id):
     post = Post.objects.filter(id=id).first()
-    
-    return render(request, 'hubapp/details.html', {'post':post})          
+    user = request.user()
+
+    if request.method == 'POST':    
+        form = CommentForm()
+        if form.is_valid():
+            comment = form.save()
+            comment.post = post
+            comment.user = user 
+            comment.save()
+    else:
+        form = CommentForm()        
+    return render(request, 'hubapp/details.html', {'post':post, 'form':form})          
 
 def post(request):
     if request.method == 'POST':
