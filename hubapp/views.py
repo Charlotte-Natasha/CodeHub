@@ -56,8 +56,11 @@ def process(request):
     return render(request, 'hubapp/process.html')
 
 def profile(request):
+    image = request.FILES.get('image')
+    user = request.user
+    profile = Profile.objects.get( user=user, profile_picture=image)
 
-    return render(request, 'hubapp/profile.html')
+    return render(request, 'hubapp/profile.html', {'profile':profile})
 
 def details(request, id):
     post = Post.objects.filter(id=id).first()
