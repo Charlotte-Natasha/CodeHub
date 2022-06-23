@@ -11,17 +11,6 @@
     <div class="container">
         <h3 class="text-white">{{ post.question }}</h3>
 
-        <div class="media justify-content-center">
-            <div class="media-left">
-                {% if comment.user.profile.picture %}
-                <img class="rounded-circle" src="{{ comment.user.profile.picture.url }}" alt="Image"
-                    style="width: 4rem; height: 4rem;">
-                {% else %}
-                <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image"
-                    style="width: 4rem; height: 4rem;">
-                {% endif %}
-            </div>
-
             <form action="" method="POST">
                 <p class="text-white">Answer here..</p>
 
@@ -39,8 +28,8 @@
                     <article class="col media text d-flex">
                         <figure style="margin-right: 2%;">
                             <div>
-                                {% if comment.user.profile.picture %}
-                                <img class="rounded-circle" src="{{ comment.user.profile_picture.url }}" alt="Image"
+                                {% if comment.profile.profile_picture %}
+                                <img class="rounded-circle" src="{{ comment.profile.profile_picture.url }}" alt="Image"
                                     style="width: 4rem; height: 4rem;">
                                 {% else %}
                                 <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image"
@@ -53,8 +42,8 @@
                         <div class="media-content">
                             <div class="categories d-flex justify-content-center">
                                 <p>
-                                    {% if comment.user.profile.user %}
-                                    <small class="text-white"> @{{ comment.user.username }} </small>
+                                    {% if comment.profile.user %}
+                                    <small class="text-white"> @{{ comment.profile.user }} </small>
                                     {% else %}
                                     <strong>Unknown</strong>
                                     {% endif %}

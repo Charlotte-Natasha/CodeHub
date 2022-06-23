@@ -9,8 +9,8 @@
         <br>
         <div class="row">
             <div class="col-3">
-                {% if profile.picture %}
-                <span><img class="rounded-circle" src="{{ user.profile.profile_picture.url }}" style="width: 6rem; height: 6rem;"></span>
+                {% if profile.profile_picture %}
+                <span><img class="rounded-circle" src="{{ profile.profile_picture.url }}" style="width: 6rem; height: 6rem;"></span>
                 {% else %}
                 <span><img class="rounded-circle text-white" src="{% static 'images/noimage.jpg'%}" alt="No Profile"
                         style="width: 4rem; height: 4rem;"></span>
