@@ -27,23 +27,16 @@
                 <span class="profile-user text-white"> @{{ profile.user }}</span>
     
                 {% if user.is_authenticated and user == profile.user %}
-                <span href="#" class="btn">Edit profile</span>
+                <br>
+                <br>
+                <span href="#" class="btn text-white">Edit profile</span>
                 {% endif %}
     
                 {% if user.is_authenticated and user != profile.user %}
                 <p>
-                    <span class="heading text-white">{{ posts_count }} Posts</span>
+                    <span class="heading text-white">{{ post_count }} Posts</span>
                 </p>
                 {% endif %}
-                <h3 style="font-weight: bold;" class="title is-1 text-white">
-                    {% if profile.first_name %}
-    
-                    {{ profile.first_name }} 
-    
-                    {{profile.last_name }} 
-    
-                    {% endif %}
-                </h3>
             </div>
         </div>
         <br>
