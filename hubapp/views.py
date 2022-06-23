@@ -58,13 +58,13 @@ def profile(request):
 
 def details(request, id):
     post = Post.objects.filter(id=id).first()
-    comment = Comment.objects.all()
+    comment = Comment.objects.filter(post=post).order_by('date')
     user = request.user
 
     if request.method == 'POST':    
         form = CommentForm()
         if form.is_valid():
-            comment = form.save()
+            comment = form.save(commit=False)
             comment.post = post
             comment.user = user 
             comment.save()

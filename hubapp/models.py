@@ -13,36 +13,22 @@ class Post(models.Model):
         return f'{self.user.username} Post'
 
 class Profile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-	first_name = models.CharField(max_length=50, null=True, blank=True)
-	last_name = models.CharField(max_length=50, null=True, blank=True)
-	profile_info = models.TextField(max_length=150, null=True, blank=True)
-	created_at = models.DateTimeField(auto_now_add=True)
-	profile_picture = models.ImageField( upload_to='profilepics')
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profile_picture = models.ImageField(null=True, blank=True, upload_to='profilepics')
+    created_at = models.DateTimeField(auto_now_add=True)
 
-	def save(self, *args, **kwargs):
-		super().save(*args, **kwargs)
-		SIZE = 250, 250
+    def __str__(self):
+        return f'{self.user.username} Profile'
 
+    def save_profile(self):
+        self.user
 
-	@classmethod
-	def search_profile(cls, search_term):
-			profs = cls.objects.filter(user__username__icontains=search_term)
-			return profs
+    def delete_profile(self):
+        self.delete()    
 
-	def __str__(self):
-		return self.user.username
-		
-
-def create_user_profile(sender, instance, created, **kwargs):
-	if created:
-		Profile.objects.create(user=instance)
-
-def save_user_profile(sender, instance, **kwargs):
-	instance.profile.save()
-
-post_save.connect(create_user_profile, sender=User)
-post_save.connect(save_user_profile, sender=User)
+    @classmethod
+    def search_profile(cls, name):
+        return cls.objects.filter(user__username__icontains=name).all()
 
 class Comment(models.Model):
 	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')

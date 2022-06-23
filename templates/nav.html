@@ -50,14 +50,14 @@
                             <ul class="sub-menu">
                                 {% if user.is_authenticated%}
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'profile' %}">{{request.user}}</a>
+                                    <a href="{% url 'profile' %}">{{request.user}}</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'logout' %}">LogOut</a>
+                                    <a href="{% url 'logout' %}">LogOut</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'login' %}">LogIn</a>
+                                    <a href="{% url 'login' %}">LogIn</a>
                                 </li>
                                 {% endif %}
                             </ul>
