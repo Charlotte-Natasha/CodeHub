@@ -1,75 +1,56 @@
-<!-- Sub Header -->
-<div class="sub-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-sm-8">
-                <div class="left-content">
-                    <p>Connect with us on all our social media.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-4">
-                <div class="right-icons">
-                    <ul>
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    
+                    <a href="{% url 'home' %}" class="logo">
                         Code Hub
                     </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class=""><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li class=""><a href="{% url 'home' %}" 
+                            {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>Home</a></li>
                         <li class=""><a href="{% url 'community' %}">Community</a></li>
+                        
                         <li class="has-sub">
-                            <a href="javascript:void(0)">Pages</a>
+                            <a href="javascript:void(0)">Pages</a> 
                             <ul class="sub-menu">
                                 <li><a href="{% url 'process' %}">Interview Process</a></li>
-                                <li><a href="">Jobs Here</a></li>
+                                <li><a href="#">Jobs Here</a></li>
                             </ul>
                         </li>
+                        
                         <li class=""><a href="{% url 'resources' %}">Resources</a></li> 
                         <li class=""><a href="{% url 'contact' %}">Contact Us</a></li>
+                        
                         <li class="has-sub">
-                            <a href="{% url 'profile' %}">Profile</a>
+                            <a href="{% if user.is_authenticated %}{% url 'profile' %}{% else %}{% url 'login' %}{% endif %}">Profile</a>
+                            
                             <ul class="sub-menu">
-                                {% if user.is_authenticated%}
+                                {% if user.is_authenticated %}
                                 <li>
-                                    <a href="{% url 'profile' %}">{{request.user}}</a>
+                                    <a href="{% url 'profile' %}">{{ user.username }}</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'logout' %}">LogOut</a>
+                                    <a href="{% url 'logout' %}">Log Out</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a href="{% url 'login' %}">LogIn</a>
+                                    <a href="{% url 'login' %}">Log In</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'signup' %}">Sign Up</a> 
                                 </li>
                                 {% endif %}
                             </ul>
                         </li> 
-                    </ul>        
+                    </ul>        
+                    
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
+                    </nav>
             </div>
         </div>
     </div>
 </header>
-<!-- ***** Header Area End ***** -->

@@ -3,59 +3,82 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="" content="">
+    <meta name="description" content="Code Hub Community and Learning Resources">
+    <meta name="author" content="Charlotte-Natasha">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>CodeHub</title>
+    <title>{% block title %}CodeHub{% endblock title %}</title>
 
-    <!-- Bootstrap core CSS -->
+    <style>
+        /* This pushes the main content down, clearing the space occupied by the fixed header */
+        body {
+            /* Adjust 80px if your header height is different */
+            padding-top: 180px; 
+            /* Optional: Set a global dark background color here if all pages are dark */
+            /* background-color: #24292E; */
+        }
+    </style>
+    
+
     {% block styles %}
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-
-    <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css'%}">
     <link rel="stylesheet" href="{% static 'assets/css/templatemo-edu-meeting.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
-    <link rel="stylesheet" href=" {% static 'assets/css/lightbox.css' %} ">
-    {% endblock %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'assets/css/lightbox.css' %}">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css" rel="stylesheet"/>
 
+    {% endblock styles %}
 
 </head>
 
 <body>
-
+    
     {% include 'nav.html' %}
 
-    {% block content%}
+    <main role="main">
+        {% block content %}
 
-    {% endblock%}
+        {% endblock content %}
+    </main>
+    
+    <footer class="footer py-3 border-top border-secondary text-center theme-background-fixed mt-auto">
+    <div class="container">
+        <p class="text-white small mb-0">
+            &copy; 2022 CODE HUB Co., Ltd. All Rights Reserved.
+            
+            <span class="d-none d-sm-inline mx-2 text-muted">|</span> 
+            
+            Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_blank"
+                rel="noopener noreferrer" class="text-info" title="website templates">Charlotte-Natasha</a>
+        </p>
+    </div>
+</footer>
 
-<!-- Scripts -->
-    <!-- Bootstrap core JavaScript -->
-    {% block scripts %}
+
+{% block scripts %}
     <script src="{% static 'vendor/jquery/jquery.min.js'%} "></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/isotope.min.js' %}"></script>
-    <script src=" {% static 'assets/js/owl-carousel.js' %}"></script>
-    <script src=" {% static 'assets/js/lightbox.js' %}"></script>
-    <script src=" {% static 'assets/js/tabs.js' %}"></script>
-    <script src=" {% static 'assets/js/video.js' %}"></script>
-    <script src=" {% static 'assets/js/slick-slider.js' %}"></script>
-    <script src=" {% static 'assets/js/custom.js' %}"></script>  
-    {% endblock %}
-
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'assets/js/tabs.js' %}"></script>
+    <script src="{% static 'assets/js/video.js' %}"></script>
+    <script src="{% static 'assets/js/slick-slider.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script> 
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.js"></script>
 
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    
+    {% endblock scripts %}
 
-
-
+    
 
     <script>
         //according to loftblog tut

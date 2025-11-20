@@ -32,8 +32,31 @@ def contact(request):
     return render(request, 'hubapp/contact.html')    
 
 def resources(request):
+    
+    resources_data = [
+        {
+            'title': 'Codewars',
+            'description': 'Practice your kata challenges here...',
+            'image_url': 'https://camo.githubusercontent.com/.../codewars.png', # Use a shorter, valid URL
+            'link_url': 'https://www.codewars.com/dashboard',
+        },
+        {
+            'title': 'Moringa School',
+            'description': 'Has one of the best coding courses. Start your journey to coding here.',
+            'image_url': 'https://netstorage-tuko.akamaized.net/.../moringa.png',
+            'link_url': 'https://moringaschool.com/',
+        },
+        # Add all your other resource dictionaries here!
+        # Remember to use the `{% static 'path/to/image.jpg' %}` tag in the template
+        # if the image is saved locally in your static files.
+    ]
 
-    return render(request, 'hubapp/resources.html') 
+    # Create the context dictionary to send to the template
+    context = {
+        'resources': resources_data
+    }
+
+    return render(request, 'hubapp/resources.html', context) 
 
 @login_required(login_url="/login")
 def community(request):
@@ -90,4 +113,3 @@ def post(request):
         form = PostForm()  
 
     return render(request, 'hubapp/post.html', {'form':form})                 
-

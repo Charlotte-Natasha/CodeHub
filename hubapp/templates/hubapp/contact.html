@@ -4,80 +4,166 @@
 
 {% block content %}
 
-<section class="contact-us" id="contact">
+<!-- Add this style block to ensure full page coverage -->
+<style>
+    .contact-us {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    body, html {
+        min-height: 100vh;
+    }
+    
+    /* If your background is on a specific element, add: */
+    .contact-us {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<section class="contact-us py-5" id="contact">
     <div class="container">
+        
+        <!-- Success/Error Messages -->
+        {% if messages %}
+            <div class="row">
+                <div class="col-lg-12 mb-4">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        
         <div class="row">
-            <div class="col-lg-9 align-self-center">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form id="contact" action="" method="post">
-                            {% csfr_token %}
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h2>Let's get in touch</h2>
-                                </div>
-                                <div class="col-lg-4">
-                                    <fieldset>
-                                        <input name="name" type="text" id="name" placeholder="YOURNAME...*" required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-4">
-                                    <fieldset>
-                                        <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*"
-                                            placeholder="YOUR EMAIL..." required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-4">
-                                    <fieldset>
-                                        <input name="subject" type="text" id="subject" placeholder="SUBJECT...*"
-                                            required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <textarea name="message" type="text" class="form-control" id="message"
-                                            placeholder="YOUR MESSAGE..." required=""></textarea>
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="button">SEND MESSAGE NOW</button>
-                                    </fieldset>
-                                </div>
+            
+            <!-- Contact Form -->
+            <div class="col-lg-9 mb-5 mb-lg-0">
+                <div class="contact-form-wrap p-4 shadow bg-white rounded">
+                    
+                    <h2 class="mb-4">Let's Get In Touch</h2>
+                    
+                    <form id="contact-form" action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-3">
+                                <label for="id_name" class="form-label">Name <span class="text-danger">*</span></label>
+                                <input name="name" type="text" id="id_name" 
+                                       class="form-control {% if form.name.errors %}is-invalid{% endif %}" 
+                                       placeholder="Your Name" 
+                                       value="{{ form.name.value|default:'' }}"
+                                       required>
+                                {% if form.name.errors %}
+                                    <div class="invalid-feedback">{{ form.name.errors.0 }}</div>
+                                {% endif %}
                             </div>
-                        </form>
+                            
+                            <div class="col-lg-4 col-md-6 mb-3">
+                                <label for="id_email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input name="email" type="email" id="id_email" 
+                                       class="form-control {% if form.email.errors %}is-invalid{% endif %}" 
+                                       placeholder="your@email.com" 
+                                       value="{{ form.email.value|default:'' }}"
+                                       required>
+                                {% if form.email.errors %}
+                                    <div class="invalid-feedback">{{ form.email.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-12 mb-3">
+                                <label for="id_subject" class="form-label">Subject <span class="text-danger">*</span></label>
+                                <input name="subject" type="text" id="id_subject" 
+                                       class="form-control {% if form.subject.errors %}is-invalid{% endif %}" 
+                                       placeholder="Subject" 
+                                       value="{{ form.subject.value|default:'' }}"
+                                       required>
+                                {% if form.subject.errors %}
+                                    <div class="invalid-feedback">{{ form.subject.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-lg-12 mb-4">
+                                <label for="id_message" class="form-label">Message <span class="text-danger">*</span></label>
+                                <textarea name="message" class="form-control {% if form.message.errors %}is-invalid{% endif %}" 
+                                          id="id_message" placeholder="Your Message" required rows="5">{{ form.message.value|default:'' }}</textarea>
+                                {% if form.message.errors %}
+                                    <div class="invalid-feedback">{{ form.message.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <button type="submit" id="form-submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message Now
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Information Sidebar -->
+            <div class="col-lg-3">
+                <div class="contact-info p-4 shadow bg-white rounded h-100">
+                    <h4 class="mb-4">Contact Info</h4>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-envelope text-primary me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Email</h6>
+                                <p class="mb-0 text-muted">info@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-phone text-primary me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Phone</h6>
+                                <p class="mb-0 text-muted">+1 234 567 8900</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-map-marker-alt text-primary me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Address</h6>
+                                <p class="mb-0 text-muted">123 Street Name<br>City, State 12345<br>Country</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h6 class="mb-3">Follow Us</h6>
+                        <div class="d-flex gap-2">
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="right-info">
-                    <ul>
-                        <li>
-                            <h6>Phone Number</h6>
-                            <span></span>
-                        </li>
-                        <li>
-                            <h6>Email Address</h6>
-                            <span></span>
-                        </li>
-                        <li>
-                            <h6>Street Address</h6>
-                            <span>Avenue Lavayssiere - AL, 46250, Cazal</span>
-                        </li>
-                        <li>
-                            <h6>Website URL</h6>
-                            <span></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            
         </div>
-    </div>
-    <div class="footer">
-        <p>Copyright © 2022 CODE HUB Co., Ltd. All Rights Reserved.
-            <br>Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_parent"
-                title="website templates">Charlotte-Natasha</a>
-        </p>
     </div>
 </section>
 

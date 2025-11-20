@@ -2,30 +2,25 @@
 
 {% load crispy_forms_tags %}
 
-{% load static %}
-
 {% block content %}
 
-<section class="meetings-page" id="meetings">
-    <div class="container  justify-content-center">
-        <h1 class="text-center text-white mt-2">Upload Post</h1>
+<div class="container mt-5 mb-5">
+    <h1 class="text-center text-white mb-4">Upload Post</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <form method="POST"> 
+                {% csrf_token %}
     
-        <form method="POST" role="form" action="">
+                {{ form| crispy }}
     
-            {% csrf_token %}
+                <button type="submit" class="btn btn-primary mt-3">
+                    Create Post
+                </button>
     
-            {{ form| crispy }}
-    
-            <button type="submit" name="action" class="btn filters text-white">Post...</button>
-    
-        </form>
+            </form>
+        </div>
     </div>
-    <div class="footer">
-        <p>Copyright © 2022 CODE HUB Co., Ltd. All Rights Reserved.
-            <br>Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_parent"
-                title="website templates">Charlotte-Natasha</a>
-        </p>
-    </div>
-</section>
+</div>
 
 {% endblock %}

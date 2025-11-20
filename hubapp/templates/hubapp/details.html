@@ -1,73 +1,73 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
-
 {% load static %}
 
 {% block content %}
 
-<section class="meetings-page" id="meetings">
-
+<section class="details-page py-5" id="details">
     <div class="container">
-        <h3 class="text-white">{{ post.question }}</h3>
+        
+        <div class="post-header mb-4">
+            <h1 class="text-white">{{ post.question }}</h1>
+        </div>
+
+        <div class="comment-form mb-5 p-4 rounded bg-dark">
+            <h4 class="text-white mb-3">Answer Here</h4>
 
             <form action="" method="POST">
-                <p class="text-white">Answer here..</p>
-
                 {% csrf_token %}
 
                 {{ form | crispy }}
 
-                <button style="margin-top: -5%" type="submit" name="action" class="btn mt-2 text-white">Post
-                    comment</button>
+                <button type="submit" name="action" class="btn btn-primary mt-3">
+                    Post Comment
+                </button>
             </form>
-
-            <div class="card-content">
-                <div class="row">
-                    {{ comment.body }}
-                    {% for comment in comment %}
-                    <article class="col media text d-flex">
-                        <figure style="margin-right: 2%;">
+        </div>
+        
+        <div class="comments-section">
+            <h4 class="text-white mb-4">{{ comment_list.count }} Comments</h4>
+            
+            <div class="row">
+                {% for cmt in comment_list %}
+                <article class="col-lg-12 mb-4">
+                    <div class="d-flex align-items-start p-3 bg-secondary rounded shadow-sm">
+                        
+                        <figure class="me-3 mt-1">
                             <div>
-                                {% if comment.profile.profile_picture %}
-                                <img class="rounded-circle" src="{{ comment.profile.profile_picture.url }}" alt="Image"
-                                    style="width: 4rem; height: 4rem;">
+                                {% if cmt.profile.profile_picture %}
+                                <img class="rounded-circle" src="{{ cmt.profile.profile_picture.url }}" alt="{{ cmt.profile.user.username }}'s Image"
+                                    style="width: 4rem; height: 4rem; object-fit: cover;">
                                 {% else %}
-                                <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Image"
-                                    style="width: 4rem; height: 4rem;">
+                                <img class="rounded-circle" src="{% static 'images/noimage.jpg'%}" alt="Placeholder Image"
+                                    style="width: 4rem; height: 4rem; object-fit: cover;">
                                 {% endif %}
                             </div>
                         </figure>
 
+                        <div class="media-content w-100">
+                            <p class="mb-1">
+                                {% if cmt.user %}
+                                <small class="text-info fw-bold me-2"> @{{ cmt.user.username }} </small>
+                                {% else %}
+                                <small class="text-danger fw-bold"> Unknown User </small>
+                                {% endif %}
+                                
+                                <p class="text-white mt-1">{{ cmt.body }}</p>
 
-                        <div class="media-content">
-                            <div class="categories d-flex justify-content-center">
-                                <p>
-                                    {% if comment.profile.user %}
-                                    <small class="text-white"> @{{ comment.profile.user }} </small>
-                                    {% else %}
-                                    <strong>Unknown</strong>
-                                    {% endif %}
-                                    <br>
-                                    <small class="text-white fw-bold">{{ comment.body }}</small>
-                                    <br>
-                                    <small>
-                                        <p class="text-white">{{ comment.date }}</p>
-                                    </small>
-                                </p>
-                            </div>
-
-                    </article>
-                    {% endfor %}
-                </div>
-
+                                <small class="text-muted">
+                                    {{ cmt.date|date:"M d, Y P" }} </small>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+                {% empty %}
+                <p class="text-white-50 p-3">Be the first to comment!</p>
+                {% endfor %}
             </div>
-            <div class="footer">
-                <p>Copyright © 2022 CODE HUB Co., Ltd. All Rights Reserved.
-                    <br>Design: <a href="https://github.com/Charlotte-Natasha/CodeHub" target="_parent"
-                        title="website templates">Charlotte-Natasha</a>
-                </p>
-            </div>
+        </div>
+    </div>
+    
 </section>
 
 {% endblock %}

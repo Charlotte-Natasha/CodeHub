@@ -880,6 +880,21 @@ services
   line-height: 50px;
 }
 
+/*
+---------------------------------------------
+footer
+---------------------------------------------
+*/
+
+/* Add this new class to your theme's stylesheet */
+.theme-background-fixed {
+    background-image: url(../images/meetings-bg.jpg); /* Copied property */
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Removed padding properties as they are not needed for a small footer */
+}
 
 /*
 ---------------------------------------------
@@ -893,7 +908,7 @@ section.upcoming-meetings {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 230px;
+  padding-top: 80px;
   padding-bottom: 110px;
 }
 
