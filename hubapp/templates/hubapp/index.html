@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="section main-banner" id="top" data-section="section1">
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'assets/images/course-video.mp4'%}" type="video/mp4" />
+    </video>
+
+    <div class="video-overlay header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="caption">
+                        <h6>Hello Students</h6>
+                        <h2>Welcome to CodeHub</h2>
+                        <p>A cheat sheet to everything code related. Let's help you break into the tech industry as easy
+                            as we can.
+                        <div class="main-button-red">
+                            <div class=""><a href="{% url 'contact' %}">Join Us Now!</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Main Banner Area End ***** -->
+<section class="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="owl-service-item owl-carousel">
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/service-icon-01.png' %}" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Best Education</h4>
+                            <p>We have a list of all the bootcamps and schools that we are sure will benefit you.</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/service-icon-02.png' %}" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Best Community</h4>
+                            <p>Pose your questions in the community section and get answers from a number of different people.</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/service-icon-02.png' %}" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Job Market</h4>
+                            <p>We post a variety of jobs to help in your job search. We try and help as much as possible.</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/service-icon-03.png' %}" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Best Networking</h4>
+                            <p>You might find what you are looking for don't be shy to seek help we accommodate everyone.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
